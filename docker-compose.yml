@@ -24,4 +24,14 @@ services:
     depends_on:
       - db # this means there is no point running this container if db is not up
 
-
+  app: #description of what it is here https://youtu.be/NH4VZaP3_9s?t=2645
+    container_name: app
+    build: .
+    command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    restart: always

@@ -1,3 +1,3 @@
-# yeah
+`docker-compose up`
 
-## Welcome to my ~~old~~ new Readme
+pg Admin on `localhost:5050`
