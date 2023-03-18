@@ -1,0 +1,27 @@
+version: "3.8" # code version
+
+services:
+
+  db: #this name will be also used to find the db to connect when registrating in pgadmin
+    container_name: postgresql_db # optional
+    image: postgres # it's like the software installation .exe (think of installing a software from a CD / USBkey). It will be dl from dockerhub
+    restart: always # important to have it running even after an error
+    ports:
+      - 5432:5432 # XXXX:YYYY => X= localmachine port, Y Container port
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
+    ports:
+      - 5050:80 # 80 internet port and pgadmin is a web based service
+    depends_on:
+      - db # this means there is no point running this container if db is not up
+
+
